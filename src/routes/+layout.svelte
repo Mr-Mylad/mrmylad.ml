@@ -1,16 +1,29 @@
 <script lang="ts">
     import "$lib/index.css";
-    let app: HTMLDivElement;
-    let darkModeEnabled: boolean = false;
+    import { onMount } from "svelte";
+
+    let darkModeEnabled: boolean = true;
+
+    onMount(() => {
+        darkModeEnabled = localStorage.darkModeEnabled ? 
+            localStorage.darkModeEnabled === "true" ? true : false 
+        : true;
+    });
+
     const toggleDarkMode: () => void = () => {
         darkModeEnabled = !darkModeEnabled;
-    };
-    $: appDivClass = `${darkModeEnabled ? "dark bg-gray-800" : "bg-gray-50"}`;
+        localStorage.darkModeEnabled = darkModeEnabled;
+    }
+    $: appDivClass = `${darkModeEnabled ? "dark bg-gray-950" : "bg-slate-50"} h-screen m-0`;
 </script>
 
-<div id="app" class={appDivClass} bind:this={app}>
-    <nav class="mb-1 text-right w-screen text-black dark:text-white bg-white dark:bg-gray-950">
-        <button class="border border-gray-950" on:click={toggleDarkMode}>{darkModeEnabled ? "Light Mode" : "Dark Mode"}</button>
+<div id="app" class={appDivClass}>
+    <!-- Sidebar -->
+    <nav class="fixed top-0 right-0 h-screen w-16 m-0 flex flex-col text-black dark:text-white bg-slate-300 dark:bg-gray-800 shadow-lg">
+        <button class="sidebar-icon" on:click={toggleDarkMode}>{darkModeEnabled ? "Light Mode" : "Dark Mode"}</button>
+        <hr class="h-fit mb-2 border-gray-800 dark:border-slate-300 border-y" />
+        <button class="sidebar-icon" on:click={() => open("/", "_self")}>Home</button>
+        <button class="sidebar-icon" on:click={() => open("/AboutMe/", "_self")}>About Me</button>
     </nav>
     <slot />
 </div>
