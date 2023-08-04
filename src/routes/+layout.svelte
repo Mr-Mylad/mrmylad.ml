@@ -19,9 +19,9 @@
 
 <div id="app" class={appDivClass}>
     <!-- Sidebar -->
-    <nav class="fixed top-0 right-0 h-screen w-16 m-0 flex flex-col text-black dark:text-white bg-slate-300 dark:bg-gray-800 shadow-lg">
+    <nav class="fixed bottom-0 right-0 h-16 w-full sm:w-16 m-0 flex text-black dark:text-white bg-slate-300 dark:bg-gray-800 shadow-lg sm:flex-col sm:justify-center sm:items-center sm:h-screen">
         <button class="sidebar-icon" on:click={toggleDarkMode}>{darkModeEnabled ? "Light Mode" : "Dark Mode"}</button>
-        <hr class="h-fit mb-2 border-gray-800 dark:border-slate-300 border-y" />
+        <hr class="h-fit mb-2 border-gray-800 dark:border-slate-300 border-y sm:hidden" />
         <button class="sidebar-icon" on:click={() => open("/", "_self")}>Home</button>
         <button class="sidebar-icon" on:click={() => open("/AboutMe/", "_self")}>About Me</button>
     </nav>
